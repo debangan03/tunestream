@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import MusicVisualizer from "../Components/MusicVisualizer";
 const URL = import.meta.env.VITE_PUBLIC_URL;
+import Loading from '../Components/Loading';
 
 const ArtistDetails = ({
   handleSongSelect,
@@ -12,8 +13,8 @@ const ArtistDetails = ({
   currentsong,
 }) => {
   const { id } = useParams();
-  const [artist, setartist] = useState({});
-  const [songs, setsongs] = useState([]);
+  const [artist, setartist] = useState();
+  const [songs, setsongs] = useState();
 
   const fetchartistdetailsbyid = async () => {
     const { data } = await axios.post(
@@ -30,7 +31,8 @@ const ArtistDetails = ({
   }, []);
  
   return (
-    <div className="min-h-screen flex flex-col pb-44 px-2 pt-2 items-center">
+    <>
+   {(artist && songs) ? <div className="min-h-screen flex flex-col pb-44 px-2 pt-2 items-center">
       <div className="w-full  stickey  p-3 flex flex-col rounded-xl shadow-zinc-800 shadow-md bg-zinc-900  top-0">
         <div className="relative">
           <img
@@ -61,7 +63,7 @@ const ArtistDetails = ({
           ))}
         </div>
       </div>
-    </div>
+    </div>:<Loading/>}</>
   );
 };
 

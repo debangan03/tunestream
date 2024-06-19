@@ -3,6 +3,7 @@ import MusicCard from "../Components/Music/MusicCard";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import MusicVisualizer from "../Components/MusicVisualizer";
+import Loading from "../Components/Loading";
 const URL = import.meta.env.VITE_PUBLIC_URL;
 
 const Playlistdetails = ({
@@ -14,8 +15,8 @@ const Playlistdetails = ({
   handlePlaylistSelect,
 }) => {
   const { id } = useParams();
-  const [artist, setartist] = useState({});
-  const [songs, setsongs] = useState([]);
+  const [artist, setartist] = useState();
+  const [songs, setsongs] = useState();
   const[includedsong,setincludeedsong] = useState();
 
   const fetchartistdetailsbyid = async () => {
@@ -34,7 +35,8 @@ const Playlistdetails = ({
   }, [id]);
 
   return (
-    <div className="min-h-screen flex flex-col pb-44 px-2 pt-2 items-center">
+    <>
+    {(artist && songs)?<div className="min-h-screen flex flex-col pb-44 px-2 pt-2 items-center">
       <div className="w-full  stickey  p-3 flex flex-col rounded-xl shadow-zinc-800 shadow-md bg-stone-800  top-0">
         <div className="relative">
           <img
@@ -61,7 +63,7 @@ const Playlistdetails = ({
           ))}
         </div>
       </div>
-    </div>
+    </div>:<Loading/>}</>
   );
 };
 

@@ -63,7 +63,7 @@ function Home({ handleSongSelect, currentsong,handleArtistSelect,currentArtist }
         {artists &&
           artists.map((item, i) => {
             return (
-              <div key={item._id} className="flex-shrink-0 lg:w-40 lg:h36 w-28 h-24  ">
+              <div key={i} className="flex-shrink-0 lg:w-40 lg:h36 w-28 h-24  ">
                 <ArtistCard item={item} currentArtist={currentArtist} currentsong={currentsong} />
               </div>
             );
